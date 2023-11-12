@@ -1,0 +1,228 @@
+#+title: 量子力学推导笔记
+#+options: toc:nil
+#+class:article
+一生只要做一次
+* 氢原子波函数
+
+类比简谐振子6步骤
+1. 变数变换
+2. 渐进行为
+3. 正规函数
+4. 级数解
+5. 边界条件
+6. 特殊函数 
+7. 解方程
+
+受力
+\begin{equation}
+\label{eq:1}
+F=k \frac{q_1q_2}{r^2}=\frac{e^2}{r^2}=-\nabla V
+\end{equation}
+积分得到 $V(\vec{r})=V(r)=-\frac{e^2}{r}$
+其中，$e^2=\frac{q^2}{4\pi\epsilon_{0}},q=1.6\times10^{-19}\mathrm{C}$
+$H=K+V=\frac{1}{2}mv^2+V=\frac{-h^2}{2m}\nabla^{2} -\frac{e^2}{r}$
+$K=\frac{p^2}{2m}=(-ih\nabla)^2 \frac{1}{2m}=\frac{-h^2}{2m}\nabla^2$
+可交换性
+$\psi_{nlm}$,检查nlm 对应的 $\hat{H},\hat{L^2},\hat{L}_z$ 可交换性
+\begin{equation}
+\label{eq:4}
+[\hat{H},\hat{L}]=[\frac{-h}{2m}\frac{1}{r^2}\frac{\partial}{\partial r}(r^2 \frac{\partial}{\partial r})+\frac{h^2}{2mr^2}\hat{L}]
+\end{equation}
+基础表达式
+$$H\psi=E\psi$$
+
+\begin{equation}
+\label{eq:5}
+[\frac{-\hbar^2}{2m}\frac{1}{r^2}\frac{\partial}{\partial r}(r^{2}\frac{\partial}{\partial r}+\frac{l(l+1)\hbar^2}{2mr^2}-\frac{e^2}{r})]\psi(r,\theta,\phi)=E\psi(r,\theta,\phi)
+\end{equation}
+$\psi(r,\theta,\phi)=R(r)Y^m_l(\theta,\phi)$
+\begin{equation}
+\label{eq:6}
+[\frac{-\hbar^2}{2m}\frac{1}{r^2}\frac{\mathrm{d}}{\mathrm{d} r}(r^2)\frac{\mathrm{d}}{\mathrm{d}r}+\frac{l(l+1)\hbar^{2}}{2m}\frac{1}{r^2}-\frac{e^2}{r}]R(r)=ER(r)
+\end{equation}
+化简 $\frac{1}{r}\frac{\mathrm{d^{2}}}{\mathrm{d}r}$
+
+
++ 二体 \leftrightarrow 单体
+
++ 库伦位能
++ $[H,L^2]=[H,L_z]=0$
+只剩下径向（散射也需要，不是库伦－排斥力）
+** 变数变换
+\begin{equation}
+\label{eq:7}
+(\frac{-\hbar^2}{2m}\frac{1}{r}\frac{\mathrm{d^2}}{\mathrm{d}}r^2+\frac{l(l+1)\hbar^2}{2mr^2}-\frac{e^2}{r})R(r)
+\end{equation}
+很重要，下面转换
+$\frac{-\hbar^2}{2m}\frac{\mathrm{d^2}}{\mathrm{d}r^2}u+(\frac{l(l+1)\hbar^2}{2mr^2}-\frac{e^2}{r})u(r)=Eu(r)$
+$\frac{l(l+1)\hbar^2}{2mr^2}-\frac{e^2}{r}=V_{eff}(r)$ 
+E是量子化能阶
+变换：
+先除以E
+\begin{equation}
+\label{eq:8}
+\frac{1}{4}\frac{wm}{}
+\end{equation}
+$E=\frac{-\hbar^2}{2m}k^{2}$
+!
+$\rho=2kr$
+
+\begin{equation}
+\label{eq:9}
+\frac{\mathrm{d^2}}{\mathrm{d}\rho^2}u(\rho)+(\frac{-l(l+1)}{\rho^2}+\frac{m\rho^2}{\hbar k}\frac{1}{\rho}-\frac{1}{4})u(r)=0
+\end{equation}
+其中， $\tau=\frac{me^2}{\hbar^2k}$
+
+||| SHO | H-atom |
+|--|-----|-----|
+|1|变数变换 ||
+** 渐近行为
+*** $\rho \rightarrow 0$
+\begin{equation}
+\label{eq:10}
+u''(\rho)-\frac{l(l+1)}{\rho^{2}}u(\rho)=0
+\end{equation}
+尝试解 $u(\rho)=\rho^s$
+\begin{equation}
+\label{eq:14}
+s(s-1)\rho^{s-2}-l(l+1)\rho^{s-2}=0
+\end{equation}
+
+*** $\rho \rightarrow \infty$
+\begin{equation}
+\label{eq:11}
+u''(\rho)-\frac{1}{4}u(\rho)=0
+\end{equation}
+其解为（ $\mathrm{e}^{\rho/2}\rightarrow\infty$ 不成立，去掉）
+\begin{equation}
+\label{eq:15}
+u(\rho)~\mathrm{e}^{-\rho/2}
+\end{equation}
+** 正规函数
+\begin{equation}
+\label{eq:13}
+u(\rho)=\mathrm{e}^{-\frac{\rho}{2}}\rho^{l+1}F(\rho)
+\end{equation}
+\begin{equation}
+\label{eq:12}
+u'(\rho)=[(\frac{1}{2}\rho+l+1)F(\rho)+\rho F'(\rho)]\mathrm{e}^{-\frac{\rho}{2}}\rho^{l}
+\end{equation}
+
+
+\begin{equation}
+\label{eq:16}
+u(\rho)\sim\mathrm{e}^{-\rho/2}\rho^{l+1}\mathrm{e}^{\rho}
+\end{equation}
+检验 $u(\rho\rightarrow\infty)$
+级数只能取有限项
+\begin{equation}
+\label{eq:17}
+\tau-i-l-1=0
+\end{equation}
+\begin{equation}
+\label{eq:18}
+\tau=i+l+1=n
+\end{equation}
+量子化：级数等于0 \rightarrow \tau 整数 \rightarrow k\rightarrow E
+
+束缚态，边界条件（0,\infty）
+
+
+** 再解波函数
+\tau 与13.6eV 的关系近费
+其
+薛定谔 \rightarrow l,m,n
+波尔 \rightarrow n=l
+知道主量子数（轨道角动量），得到能量
+\begin{equation}
+\label{eq:19}
+\tau=(\frac{me^2}{\hbar^2k})^2=\frac{m^2e^4}{\hbar^2 }\frac{1}{\hbar^2k^2}
+\end{equation}
+波尔：量子化，稳定态，跃迁（只能讲transition)
+普朗克（量子）和爱因斯坦（放出能量）
+
+* 径向波函数
+公设四的几种形式
+
+公设四：给出状态的机率的计算方法
+
+I: $P(a_n)=|<u_n|\varphi>|^2$
+
+II: $P(a_n)= \sum\limits_{i=1}^l|\langle u_n^l|\varphi\rangle|^{2}$
+
+III: $\mathrm{d}P(\alpha)=|\langle u_{\alpha}|\varphi\rangle|^2\mathrm{d}\alpha$
+$$\mathrm{d}P(x)=|\langle x|\varphi\rangle|^2\mathrm{d}x=|\varphi(x)|^2\mathrm{d}x$$
+
+微分：差商（差分除以自变量变化）的极限
+求和的极限－级数 series
+
+计算 $0\leq x \leq a$ 机率
+$P(0\leq x\leq a)=\lim_{n \to \infty}\sum\limits_{i=1}^n\Delta P_{i}= \int\limits_{P(0)}^{P(a)}\mathrm{d}P(x)= \int\limits_0^a \left| \varphi(x) \right|^2\mathrm{d}x$
+共轭
+
+极限： 微分：函数的极限；积分：序列的极限
+difference cotion
+
+位置
+
+积分的原因：数学原因～运动学
+内积：动力学
+
+计算 $0\leq x\leq a, y,z$
+$$P= \int\limits_{P(0,y,z)}^{P(x,y,z)}\mathrm{d}P(x,y,z)=\int\int\int \left| \left\langle x,y,z|\varphi \right\rangle \right|^{2}\mathrm{d}x\mathrm{d}y\mathrm{d}z$$
+平面角：弧长
+立体角：表面积 $r\sin\theta\cos\varphi$
+
+\begin{equation}
+\label{eq:20}
+\mathrm{d}P=\left| \left\langle r,\theta,\varphi|\psi \right\rangle \right|^2r^2\mathrm{d}r\mathrm{d}\Omega
+\end{equation}
+
+机率小体积
+$\frac{\mathrm{d}P}{\mathrm{d}V}= \left| \left\langle r,\theta,\varphi|\psi \right\rangle \right|^2= \left| \psi(r,\theta,\varphi) \right|^{2}$ 体积机率密度probabilty  volume density
+
+波函数：机率密度
+量子力学波函数：状态（在矢量空间投影）
+\begin{equation}
+\label{eq:21}
+\frac{\mathrm{d}P}{\mathrm{d}V}= \left| \psi_{nlm} \right|^2= \left| R_{nl}(r)Y_l^m(\theta,\varphi) \right|^{2}
+\end{equation}
+l=0 :光谱学 s state 电子被捕获，轨道角动量＝0
+
+*** 求电子在某一球壳上的概率
+$r \to r+\mathrm{d}r$
+不写nlm 表示任意状态不一定是稳定态
+\begin{equation}
+\label{eq:22}
+P=\int \mathrm{d} P=\int\limits_{V} \frac{\mathrm{d}P}{\mathrm{d}V}\mathrm{d}V=\int\limits_r^{}\int\limits_{\Omega}^{}\left| \psi(r,\theta,\varphi) \right|^2r^2\mathrm{d}r\mathrm{d}\Omega= \int\limits_r^{}\frac{\mathrm{d}P}{\mathrm{d}r}\mathrm{d}r
+\end{equation}
+\begin{equation}
+\label{eq:23}
+\frac{\mathrm{d}P}{\mathrm{d}r}=\int\limits_{\Omega}^{}\left| \psi(r,\theta,\varphi) \right|^{2}r^2\mathrm{d}\Omega
+\end{equation}
+//面密度，线密度
+此为径向机率密度 probability radius density
+
+对于稳定态： $$\frac{\mathrm{d}P}{\mathrm{d}r}=r^2 \left| R_{nl} \right|^2 \int\limits_{\Omega}^{} \left| Y_l^m(\theta,\varphi) \right|^{2}\mathrm{d}\\Omega=u_{nl}(r)$$
+
+电子捕获：用体积而不是径向
+原因：径向计算出来是0
+
+
+\cite{从不做与物理无关的数学}
+*** 
+\begin{equation}
+\label{eq:24}
+\mathrm{d}P= \left| \psi(r,\theta,\varphi) \right|^{2}\mathrm{d}V= \left| \left\langle r,\theta,\varphi|\psi \right\rangle \right|^{2}\mathrm{d}V
+\end{equation}
+\begin{equation}
+\label{eq:25}
+\rho_V=\frac{\mathrm{d}P}{\mathrm{d}V}= \left|\psi(r,\theta,\varphi)  \right|^{2}
+\end{equation}
+\begin{equation}
+\label{eq:26}
+\rho_r=\frac{\mathrm{d}P}{\mathrm{d}r}=r^2 \int\limits_{\Omega}^{R_{nl(r)Y_l^m(\theta,\varphi)}} \left| \psi(r,\theta,\varphi) \right|^2\mathrm{d}\Omega,\quad r^2R_{nl}^2(r)=u_{nl}^2(r)\quad(single)
+\end{equation}
+波函数单位：
++ 一维：$\frac{1}{\sqrt{L}}$
++ 三维： $\frac{1}{L^{3/2}}$

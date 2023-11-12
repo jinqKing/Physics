@@ -1,0 +1,359 @@
+#+title: landau
+#+date: <2023-11-11 Sat>
+#+author: Kintrol
+#+options: toc:nil todo:nil
+
+#+ATTR_LATEX: :width=.5\linewidth
+#+caption: Here I come
+[[./img/front.pdf]]
+# [[./img/光圈.png]]
+自我学习笔记
+* 运动方程
+** + 重点：
++ 如何得出 Lagrange 函数
++ 自由质点和其他系统有什么区别
+** 广义坐标
++ 概念
+  
+广义坐标 $q(t)$ $\rightarrow$ 广义速度 $\dot{q}(t)$
+
+#+begin_comment
+符号上加点对时间求导/空间？
+#+end_comment
+
+自由度：决定坐标需要的独立变量数目
+取自由度个数的（独立）广义坐标描述运动
+只需要坐标和速度就可以确定物体运动情况 = 数学可解方程
+#+begin_comment
+这一点是因为牛顿的力学方程吗？因为 $F=ma=m\ddot{x}$ 它会构成二阶方程，因此初值条件是两个（零阶和一阶）
+#+end_comment
+
++ 补充：
+- 坐标变换
+  不变的物理规律  
+- 约束【有约束采油所谓自由】
+即方程。
+1. （非）定常：方程是否显含时间
+2. （非）理想：虚功和为0 $\sum F\cdot\delta r =0$，举例：光滑接触不可伸长、铰链、刚性杆
+   #+begin_comment
+不懂？
+   #+end_comment
+3. （不）完整：完整只限制位置，非限制速度
+4. （单）双侧：方程是（不等式）等式
+** 最小作用量
+力学函数/Lagrande 函数： 直接假想定义有一个普遍的力学函数，由最小作用量原理我们认定每个力学系统可以用一个确定的函数描述。性质特殊
+\begin{equation}
+\label{eq:defL}
+L(q_i,\dot{q}_i,t)
+\end{equation}
+作用量： $L$ 对时间积分
+\begin{equation}
+\label{eq:defS}
+S := \int\limits_{t_2}^{t_1}L(q,\dot{q},t)\mathrm{d}t
+\end{equation}
+最小作用量原理/Hamilton 原理：
+$S$ 取最小
+
+变分法
+
+#+begin_comment
+Landau 这里根本没提变分，只是说取一个很小量，使得过程很自然（可能对不料这后面显得优点难懂）
+#+end_comment
+ 
++考虑微小变化+
+如果取价值那么使用任何的 $q(t)+\delta q(t)$ 都会使得 $S$ 增大，
+我们认为 $\delta q(t)$ 是小量，于是
+\begin{equation}
+\label{eq:3}
+\delta q(t_1)=\delta q(t_2)
+\end{equation}
+?研究这个增量带来的变化
+\begin{equation}
+\label{eq:1}
+S'- S = \int\limits_{t_2}^{t_1}L(q+\delta q,\dot{q}+\delta \dot{q},t)\mathrm{d}t - \int\limits_{t_2}^{t_1}L(q,\dot{q},t)\mathrm{d}t
+\end{equation}  
+极值点要求 $\delta S=0$
+于是
+\begin{equation}
+\label{eq:2}
+\int\limits_{t_2}^{t_1}(\frac{\partial L}{\partial q}\delta q+\frac{\partial L}{\partial \dot{q}})\mathrm{d}t=0
+\end{equation}
+
+#+begin_comment
+?为什么不对时间求
+因为上面
+#+end_comment
+
+对第一项作分步积分
+\begin{equation}
+\label{eq:7}
+\delta L=\frac{\partial L}{\partial q}\delta q+\frac{\partial L}{\partial \dot{q}}\delta \dot{q}
+\end{equation}
+有
+\begin{equation}
+\label{eq:8}
+\delta \dot{q}=\frac{\mathrm{d}}{\mathrm{d}t}\delta q
+\end{equation}
+
+于是
+\begin{equation}
+\label{eq:9}
+\delta L =\frac{\partial L}{\partial q}+\frac{\mathrm{d}}{\mathrm{d}t}\frac{\partial L}{\partial \dot{q}}\delta q
+\end{equation}
+
+
+\begin{equation}
+\label{eq:4}
+\delta S=\frac{\partial L}{\partial \dot{q}}\big|^{t_2}_{t_1}+\int\limits_{t_2}^{t_1}(\frac{\partial L}{\partial q}-\frac{\mathrm{d}}{\mathrm{d}t}\frac{\partial L}{\partial \dot{q}})\delta q\mathrm{d}t=0
+\end{equation}
+#+begin_comment
+认为 $\frac{\partial L}{\partial q}$ 是常量
+#+end_comment
+
+第一项由
+(\ref{eq:3})
+得到为0
+
+考虑到对于任意的 $\delta q$ 都成立，于是第二项恒为0
+\begin{equation}
+\label{eq:LagrangeEqu}
+\frac{\mathrm{d}}{\mathrm{d}t}\frac{\partial L}{\partial \dot{q}}=\frac{\partial L}{\partial q}
+\end{equation}
+此为 Lagrange 方程，对所有坐标成立。
+
+#+begin_comment
+?不清楚脚注中推导变分计算的方程称为 Euler 方程？
+可能指（类似求导操作的）变分过程
+#+end_comment
+
+性质：
+1. 可加性：
+   封闭无相互作用的子系统的总拉格朗日量等于子系统相加
+2. 不唯一：
+   - 相差常数
+   - 如果取
+\begin{equation}
+\label{eq:transform}
+ L_2=L_1+\frac{\mathrm{d}}{\mathrm{d}t}f(q,t)
+\end{equation}
+     此时它们相同，因为可以求作用量，然后发现它们都是最小值。
+\begin{equation}
+\label{eq:6}
+\begin{split}
+S_2&=\int L_2 \mathrm{d}t=\int L_1\mathrm{d}t + \int\frac{\mathrm{d}}{\mathrm{d}t}f(q,t)\mathrm{d}t \\
+&=S_1+\Delta f
+\end{split}
+\end{equation}
+     这里 Lagrange 量相差一个关于空间和时间的全微分都会在变分时消失。
+
+#+begin_comment
+变分消失有一点奇怪
+#+end_comment
+
+惯性参考系：空间相对它是均匀而各向同性
+
+#+begin_comment
+均匀：？梯度为0
+各向同性：？等价于不是空间的函数，或者对于空间等效为一个标量（而非适量或张量 | 电中极化率）
+#+end_comment
+
+
+#+begin_example
+自由物体不能够保持静止，如果某时刻速度为零，下一时刻开始向某个方向移动
+#+end_example
+一般而言，不同参考系运动具有不同规律
+
+!此处重要，推导出了关于 $L$ 之后得到 $L$ 的形式
+核心：与速度方向无关，与大小有关 \(\Rightarrow\) $L=L(v^2)$
+
+时空均匀意味着 $L$ 不显含 $\vec{r},t$ ， 那么只能显含速度 $\vec{v}$ ，但是因为空间各项同性（速度朝各个方向对于函数是等价的）， $L$ 不依赖于矢量 $\vec{v}$ 方向，只与其大小相关，取模的平方得到大小，因为 $\vec{v}^2=v^2$ 于是 $L=L(v^2)$ 。
+
+同时如果不显含 $\vec{r}$ 那么可以把 Langrange 写成
+\begin{equation}
+\label{eq:10}
+\frac{\partial L}{\partial \vec{r}}=0\Rightarrow \frac{\mathrm{d}}{\mathrm{d}t}\frac{\partial L}{\partial \dot{q}}=0
+\end{equation}
+也就是 $\frac{\partial L}{\partial \vec{v}}=\mathrm{const}$
+这时可以（重新得到 Galileo 的结论），因为 $L$ 只与 $v$ 相关因此 $\frac{\partial L}{\partial \vec{v}}$ 只与 $v$ 有关
+得到 $$\vec{v}=\mathrm{const}$$ :
+惯性参考系下自由运动的质点速度大小方向步发生改变【 Newton 第一定律/惯性定律】。
+
+#+begin_comment
+这里的操作，数学虽然讲的通，但完全为物理服务，直观上给人一种知道答案编造出过程，但不得不令人折服。
+大小使用平方：
+物理还是很注意使用（）表示函数子标量自变量
+#+end_comment
+
+
+
+Galileo 相对性原理
+所有运动关系定律对于两个相互匀速直线运动的惯性参考系等价（由实验得出）。 $\Rightarrow$ 存在无穷多惯性参考系而不只是有限个（可以通过相对匀速运动制造新的惯性参考系）
+Galileo 变换：
+\begin{eqnarray}
+\label{eq:5}
+\vec{r} & = & \vec{r}'+\vec{V}t\\
+t&=&t'
+\end{eqnarray}
+*Galileo 相对性原理：力学运动在 Galileo 变换下具有不变性（相互等价？）*
+
++ 补充
+  - 规范变换
+    将
+    
+    电磁场部分，
+    奇怪的注解
+    
+** 自由质点 Lagrange 函数
+研究相对惯性参考系的自由运动质点。此时 $L=L(v^2)$
+采用 Galileo 相对原理导出表达式
+#+begin_comment
+原文：依赖关系
+感觉很有大佬轻蔑畅快的文风
+#+end_comment
+取惯性参考系 K 以无穷小速度 $\varepsilon$ 相对另一个惯性参考系 K'
+\begin{equation}
+\label{eq:11}
+L'=L(v'^{2}x)=L((v+\varepsilon)^2)=L(v^2+2\vec{v}\cdot\vec{\varepsilon}+\epsilon^2)\approx L(v^2)+2 \frac{\partial L}{\partial v^2}\vec{v}\cdot\vec{\varepsilon}
+\end{equation}
+最后的表达式是将 L 展开为 $\vec{\epsilon}$ 的幂级数，忽略了一阶以上的小量。
+
+#+begin_comment
+我理解了物理为什么喜欢等号，约等于真的看起来好像很勉强
+但我不知到怎么展开幂级数
+#+end_comment
+    
+现在因为等价性（L之间相差关于时间开间的全微分是等价）要求，需要右边是全微分，那么当等式第二项与 v 线性关系才能构成时间的全导数。
+
+#+begin_comment
+有一点点勉强，充分必要性是否一定呢？
+#+end_comment
+
+于是得到 $\frac{\partial l}{\partial v^2}$ 与速度无关，此时即 $L\propto v^2$ ，添加上常数写出 L
+\begin{equation}
+\label{eq:12}
+L=\frac{m}{2}v^2
+\end{equation}
+
+进一步， K 以有限速度 $V$ 相对K' 运动也满足
+\begin{equation}
+\label{eq:13}
+L'=\frac{m}{2}v^2+2 \frac{m}{2}\vec{v}\cdot \vec{V}+\frac{m}{2}V^2=L+\frac{\mathrm{d}}{\mathrm{d}t}(2 \frac{m}{2}\vec{r}\cdot\vec{V}+\frac{m}{2}V^2)
+\end{equation}
+第二项是时间的全导数（ $V$ 是绝对的）
+
+此时， *把  $m$ 称为物体的质量*
+
+指出，只有考虑到可加性，质量才有意义。虽然可以在L前乘上不同系数（在不改变等价性的情况下使得质量绝对值改变）但质量的比例关系不变，所以质量的比才是具有真正物理意义的。
+
+观察给出的质量的定义会发现，
+质量不会是负数，否则根据最小作用量原理
+\begin{equation}
+\label{eq:14}
+S=\int\limits_{t_2}^{t_1}\frac{mv^2}{2}\mathrm{d}t
+\end{equation}
+S 总是可以取到绝对值任意大的极小值，这样我们就无法得到真实的运动
+#+begin_comment
+可以发现我们始终讨论的是极小，
+原文说快速离开1再快速到达2，我不知道为什么需要这个场景
+#+end_comment
+
+** 质点系的 Lagrange 函数
+引入 $U(\vec{r_i})$ 势能
+研究不受外力的封闭质点系，（势能的出现是）为了描述质点之间的相互作用，在自由质点的 $L$ 内加一项函数，具体形式随相互作用而定。
+\begin{equation}
+\label{eq:15}
+L=\sum_i(\frac{m_1v^2_i}{2})-U(\vec{r}_1,\cdots)
+\end{equation}
+同时定义前一项为动能
+\begin{equation}
+\label{eq:20}
+T_i:=\frac{m_iv_i^2}{2}
+\end{equation}
+势能仅仅与位置有关，因此改变位置就会改变势能。
+_于是相互作用可以瞬间传递。_
+这与经典力学基本前提相互联系：
+绝对时间假设、 Galileo 相对性原理
+
+绝对时间意味着速度相加法则对所有现象适用
+#+begin_comment
+一个物体速度改变，那么所人观察者看到的速度变化都是一样的（位移改变）
+#+end_comment
+假如作用不能瞬间发生的，而是以一个有限的速度传递，那么在相对运动参考系下结果不同，这样这个传递速度在不同参考系中就会不同，可以想到这会导致不同参考系中物理规律不一致，那么就不能满足 Galileo 相对性原理了。
+
+#+begin_comment
+K' 对 K 的速度为 V （由 Galileo K 中的速度变化是 $\Delta v$ 在 K' 是 $\Delta v+V$），现在 K 中
+#+end_comment
+
+同时时间是双向的可行的
+#+begin_comment
+热力学决定了时间的单向——熵增
+#+end_comment
+可以代入 -t 依然成立。换而言之，运动可逆。
+
+现在运动方程为
+\begin{equation}
+\label{eq:16}
+\frac{\mathrm{d}}{\mathrm{d}t}\frac{\partial L}{\partial \vec{v}}=\frac{\partial L}{\partial \vec{r}}
+\end{equation}
+代入考虑势能的 L
+\begin{equation}
+\label{eq:17}
+\frac{\mathrm{d}}{\mathrm{d}t}m\vec{v}=-\frac{\partial U}{\partial \vec{r}}
+\end{equation}
+这也被称为 Newton 方程，并且把右段矢量称为 $F$
+\begin{equation}
+\label{eq:18}
+\vec{F} := -\frac{\partial U}{\partial \vec{r}}
+\end{equation}
+#+begin_comment
+由姚珩老师我以为 F 只是函数，现在可以从先假定有势能再得到力的角度了。
+力更加彻底和相互作用联系在了一起
+似乎出现拉好多次先假定有这个函数 U,L 之后在推导具体形式
+这很像数学存在定理（尽管这里是假设就存在）
+#+end_comment
+力函数同势能一样，只与位置（坐标）有关，不依赖于速度。
+
+势能函数可以任意增减常数而不改变运动方程 [ Lagrange 方程不唯一的性质]
+一般而言，就可以取两个质点相距无穷远时没有相互作用，势能为0（距离无限增大时势能趋向于）。
+
+
+对于广义坐标 $(x,y,z)$ （三维空间）
+\begin{equation}
+\label{eq:21}
+% x_a=f_a(q_1\cdots q_s),\quad \dot{x}_a=\sum_k \frac{\partial f_a}{\partial q_k}
+x=f(q_1\cdots q_s),\quad \dot{x}=\sum_k \frac{\partial f}{\partial q_k}
+\end{equation}
+#+begin_comment
+原文 a 是第 a 个质点
+#+end_comment
+于是 L
+\begin{equation}
+\label{eq:22}
+L=\frac{1}{2}m\dot{r}^2-U=\frac{1}{2}m\sum(\dot{x}^2+\dot{y}^2+\dot{z}^2)-U=\frac{1}{2}m\sum_i^3(\sum_k \frac{\partial f_{a}}{\partial q_k})_{i}-U
+=\frac{1}{2}m\sum_{i,k}a_{ik}\dot{q}_i\dot{q}_k-U(q)
+\end{equation}
+i 表示 xyz 中的坐标，最后的等式使用二项式来简约表示
+之前的势能函数实在封闭体系的，如果存在外场时 $U=U(\vec{r},t)$
+原因：
+非封闭的 A 与（我们已知运动情况）封闭 B 相互作用
+令 A+B 是封闭的
+
+\begin{equation}
+\label{eq:19}
+L=T_A(q_A,\dot{a}_A)+T_B(q_B,\dot{q}_B)-U(q_A,q_B)
+\end{equation}
+将 $q$ 都代入时间，于是 $T_B$ 只依赖时间，它变成时间全导数，于是能过被从 L 消去
+#+begin_comment
+这里是我对物理的一个疑问
+怎么把时间带进去就变成与时间相关，而原来的函数不也是依赖时间的吗
+对自变量的考虑让我感到很不能理解
+#+end_comment
+\begin{equation}
+\label{eq:23}
+L_A=T_A(q_A,\dot{q}_A)-U(q_A,q_B(t))
+\end{equation}
+这样我们得到 *在外场中 $U$ 可能显含时间* 。
+在没有摩擦忽略连接物质量时，约束的作用就是减少系统的自由度
+#+begin_comment
+最后一句？
+#+end_comment
