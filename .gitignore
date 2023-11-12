@@ -1,0 +1,9 @@
+/test/
+/ltximg/
+/landau/ltximg/*.png
+*.Identifier
+/optic/ltximg/*.png
+/optic/
+/wao/ltximg/*.png
+/wao/seriousb/
+/note/
